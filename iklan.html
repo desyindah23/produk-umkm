@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iklan UMKM Lokal – Dukung Produk Indonesia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #007b8f, #b2ebf2);
+      color: white;
+    }
+
+    /* === LOADING STYLE === */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, #cdeffc, #e7f9ff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loading-text {
+      font-size: 2rem;
+      color: #007b8f;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 25px;
+      background: #e0f4fa;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,123,143,0.4);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #007b8f, #00c2ff);
+      color: white;
+      font-weight: bold;
+      text-align: right;
+      line-height: 25px;
+      padding-right: 10px;
+      border-radius: 20px 0 0 20px;
+      transition: width 0.2s;
+    }
+
+    /* === IKLAN STYLE === */
+    nav {
+      background: #6398e7;
+      padding: 10px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    #main-content {
+      display: none; /* Sembunyikan saat loading */
+    }
+
+    .promo-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .promo-text {
+      animation: slideIn 2s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .promo-btn {
+      margin-top: 20px;
+      background: #015f72;
+      border: none;
+      padding: 10px 25px;
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      transition: background 0.3s;
+    }
+
+    .promo-btn:hover { background: #01414e; }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 300px;
+      margin-top: 30px;
+      animation: fadeIn 3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    video {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loading-screen">
+    <div class="loading-text">LOADING</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill">0%</div>
+    </div>
+  </div>
+
+  <!-- KONTEN UTAMA -->
+  <div id="main-content">
+    <!-- NAVBAR -->
+    <nav>
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="produk.html">Produk</a></li>
+        <li><a href="pesanan.html">Pesanan</a></li>
+        <li><a href="iklan.html">Iklan</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+      </ul>
+    </nav>
+
+    <!-- PROMO -->
+    <div class="promo-section">
+      <div class="promo-text">
+        <h1>🌟 Dukung UMKM Lokal 🌟</h1>
+        <p class="fs-5">Rasakan kelezatan produk asli Indonesia. Mulai dari Rp 5.000!</p>
+        <a href="produk.html" class="promo-btn">Lihat Produk</a>
+      </div>
+      <div class="video-wrapper">
+        <video autoplay muted loop preload="metadata" aria-label="Video promosi UMKM">
+          <source src="vdiobasreng.mp4" type="video/mp4" />
+          Browser Anda tidak mendukung video.
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT LOADING -->
+  <script>
+    let progress = 0;
+    const fill = document.getElementById("progress-fill");
+    const loadingScreen = document.getElementById("loading-screen");
+    const mainContent = document.getElementById("main-content");
+
+    const interval = setInterval(() => {
+      if (progress >= 100) {
+        clearInterval(interval);
+        loadingScreen.style.display = "none";
+        mainContent.style.display = "block";
+      } else {
+        progress++;
+        fill.style.width = progress + "%";
+        fill.textContent = progress + "%";
+      }
+    }, 30); // Durasi total ~3 detik
+  </script>
+
+</body>
+</html>
